@@ -31,7 +31,7 @@ function getUserInof() {
                 return layui.layer.msg(res.message)
             }
             //请求成功,渲染用户头像信息
-            renderAvatar(user.data)
+            renderAvatar(res.data)
         }
     })
 }
@@ -41,7 +41,7 @@ function renderAvatar(user) {
     // 1.用户名（昵称优先，没有昵称用usernme）
     var name = user.nickname || user.username
     $('#welcome').html("欢迎&nbsp;&nbsp;" + name)
-        // 用户头像
+        // 渲染头像
     if (user.user_pic !== null) {
         //   有头像，显示图片头像，文字头像隐藏
         $('.layui-nav-img').show().attr('src', user.user_pic)
