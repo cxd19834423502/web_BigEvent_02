@@ -31,6 +31,7 @@ $(function() {
     var layer = layui.layer
     $('#form_reg').on('submit', function(e) {
         e.preventDefault()
+            // 发送ajax
         $.ajax({
             method: 'POST',
             url: 'http://ajax.frontend.itheima.net/api/reguser',
@@ -40,12 +41,13 @@ $(function() {
             },
             success: function(res) {
                 if (res.status != 0) {
-                    return alert(res.message)
+                    return layer.msg(res.message)
                 }
                 //提交成功后的处理代码
                 layer.msg('注册成功，请登录！');
                 //手动切换到登录表单
                 $('#link_login').click()
+                    // 重置form表单
                 $('#form_reg')[0].reset()
             }
         })
@@ -60,10 +62,10 @@ $(function() {
             url: '/api/login',
             data: $(this).serialize(),
             success: function(res) {
-                if (res.stats !== 0) {
+                if (res.status !== 0) {
                     return layer.msg(res.message)
                 }
-                layer.msg("恭喜您登录成功！")
+                layer.msg("恭喜您,登录成功！")
                 localStorage.setItem("token", res.token)
                 location.href = "/index.html"
 
